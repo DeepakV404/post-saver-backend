@@ -8,6 +8,8 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => {
+    console.log(req)
+    console.log(res)
 	res.json({ status: 'ok' });
 });
 
