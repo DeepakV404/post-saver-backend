@@ -1,7 +1,7 @@
-const userService = require('../services/userService');
+import userService from '../services/userService.js';
 
 const userController = {
-    
+
 };
 
-module.exports = userController;
+export default userController;

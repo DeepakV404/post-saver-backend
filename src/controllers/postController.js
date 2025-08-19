@@ -1,7 +1,7 @@
-const postService = require('../services/postService');
+import postService from '../services/postService.js';
 
 const postController = {
     
 };
 
-module.exports = postController;
+export default postController

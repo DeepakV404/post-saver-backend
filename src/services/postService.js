@@ -2,4 +2,4 @@ const postService = {
 
 };
 
-module.exports = postService;
+export default postService;
