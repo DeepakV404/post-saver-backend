@@ -1,9 +1,8 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import postRouter from './posts.js';
+import userRouter from './users.js';
 
-// Import route modules
-const postRoutes = require('./posts');
-const userRoutes = require('./users');
+const router = express.Router();
 
 // Health check route
 router.get('/', (req, res) => {
@@ -15,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // Route modules
-router.use('/posts', postRoutes);
-router.use('/users', userRoutes);
+router.use('/posts', postRouter);
+router.use('/users', userRouter);
 
-module.exports = router;
+export default router;
