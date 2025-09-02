@@ -29,7 +29,7 @@ export const UpdateAuthorSchema = z.object({
     description: z.string().optional(),
     thumbnail_url: z.string().url().optional().or(z.literal('')),
     role: z.string().max(200).optional(),
-    current_company: z.string().max(200).optional(),
+    current_company: z.string().max(200).optional()
 });
 
 // Author model class
