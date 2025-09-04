@@ -10,8 +10,8 @@ export const AuthorSchema = z.object({
     thumbnail_url: z.string().url().optional().or(z.literal('')),
     role: z.string().max(200, "Role must be less than 200 characters").optional(),
     current_company: z.string().max(200, "Company must be less than 200 characters").optional(),
-    created_at: z.string().datetime().optional(),
-    updated_at: z.string().datetime().optional()
+    created_at: z.coerce.date().optional(),
+    updated_at: z.coerce.date().optional()
 });
 
 // Author creation schema (without id and timestamps)
