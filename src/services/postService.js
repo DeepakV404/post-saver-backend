@@ -1,8 +1,16 @@
+import pool from '../config/database.js';
+
 const postService = {
 
     async getAllPosts() {
-        // TODO: Replace with actual database query
-        return [];
+        try {
+            const query = 'SELECT * FROM posts ORDER BY created_at DESC';
+            const result = await pool.query(query);
+            return result.rows;
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+            throw new Error('Failed to fetch posts');
+        }
     },
 
     async getPostById(postId) {
