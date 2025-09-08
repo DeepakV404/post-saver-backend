@@ -25,8 +25,8 @@ const postService = {
 
     async createPost(postData) {
         try {
-            if (!postData.title || !postData.content || !postData.author) {
-                throw new Error('Title, content, and author are required');
+            if (!postData.user_id || !postData.title || !postData.content || !postData.author) {
+                throw new Error('user_id, title, content, and author are required');
             }
             
             const newPost = await postDAO.create(postData);
