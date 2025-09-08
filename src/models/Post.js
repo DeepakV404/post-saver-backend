@@ -3,6 +3,7 @@ import { z } from 'zod';
 // Post data validation schema
 export const PostSchema = z.object({
     id: z.number().optional(), // Optional for creation, required for responses
+    user_id: z.string().uuid(),
     title: z.string().min(1, "Title is required").max(255, "Title must be less than 255 characters"),
     content: z.string().min(1, "Content is required"),
     author: z.string().min(1, "Author is required").max(100, "Author must be less than 100 characters"),
@@ -28,6 +29,7 @@ export const UpdatePostSchema = z.object({
 export class Post {
     constructor(data) {
         this.id = data.id;
+        this.user_id = data.user_id;
         this.title = data.title;
         this.content = data.content;
         this.author = data.author;
@@ -54,6 +56,7 @@ export class Post {
     toJSON() {
         return {
             id: this.id,
+            user_id: this.user_id,
             title: this.title,
             content: this.content,
             author: this.author,

@@ -17,26 +17,26 @@ class PostDAO {
 
     // Create new post
     async create(postData) {
-        const { title, content, author } = postData;
+        const { user_id, title, content, author } = postData;
         const query = `
-            INSERT INTO posts (title, content, author) 
-            VALUES ($1, $2, $3) 
+            INSERT INTO posts (user_id, title, content, author) 
+            VALUES ($1, $2, $3, $4) 
             RETURNING *
         `;
-        const result = await pool.query(query, [title, content, author]);
+        const result = await pool.query(query, [user_id, title, content, author]);
         return result.rows[0];
     }
 
     // Update post by ID
     async update(id, updateData) {
-        const { title, content, author } = updateData;
+        const { user_id, title, content, author } = updateData;
         const query = `
             UPDATE posts 
-            SET title = $1, content = $2, author = $3, updated_at = CURRENT_TIMESTAMP
-            WHERE id = $4 
+            SET user_id = COALESCE($1, user_id), title = $2, content = $3, author = $4, updated_at = CURRENT_TIMESTAMP
+            WHERE id = $5 
             RETURNING *
         `;
-        const result = await pool.query(query, [title, content, author, id]);
+        const result = await pool.query(query, [user_id, title, content, author, id]);
         return result.rows[0] || null;
     }
 
@@ -51,6 +51,12 @@ class PostDAO {
     async findByAuthor(author) {
         const query = 'SELECT * FROM posts WHERE author = $1 ORDER BY created_at DESC';
         const result = await pool.query(query, [author]);
+        return result.rows;
+    }
+
+    async findByUserId(user_id) {
+        const query = 'SELECT * FROM posts WHERE user_id = $1 ORDER BY created_at DESC';
+        const result = await pool.query(query, [user_id]);
         return result.rows;
     }
 
